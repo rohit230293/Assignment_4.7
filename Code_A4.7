@@ -1,0 +1,31 @@
+"""
+Blood glucose levels for obese patients have a mean of 100 with a standard deviation of 15. 
+A researcher thinks that a diet high in raw cornstarch will have a positive or negative 
+effect on blood glucose levels.
+A sample of 30 patients who have tried the raw cornstarch diet have a mean glucose level of 140.
+Test the hypothesis that the raw cornstarch had an effect.
+"
+
+from scipy import stats as st
+import math 
+
+#Step 1: Defining the null hypothesis:        H0 : mean = 100
+#Step 2: Defining the alternate hypothesis:   H1 : mean ≠ 100
+#Step 3: We will use Alpha level as 0.05 as this is a two-tailed test, split the alpha into two.
+alpha = 0.025
+
+#Step 4: Find the z-score associated with your alpha level. 
+print("Alpha value for one tail only = {:.2f}".format(st.norm.ppf(alpha)))
+#    looking for the area in one tail only. A z-score is -1.96. 
+#    As this is a two-tailed test, you would also be considering the left tail (z=1.96)
+#Step 5: Find the test statistic using this formula: z score formula
+z=(108-100)/(15/math.sqrt(36))
+print("Z value as per the calculation is {:.2f} i.e. Probability associated with {} is {:.5f}"
+      .format(z,z,st.norm.cdf(z)))
+
+#Step 6: Probability by looking at z- table the value associated with 3.20 is 0.9993 
+#i.e. probability of having value less than 108 is 0.9993 and more than or equals to 108 is (1-0.9993)=0.0007.
+
+#Conclusion: It is less than 0.05 so we will reject the Null hypothesis i.e. there is raw cornstarch effect.
+
+print("since {:.5f} is less than 0.05, we will reject the Null hypothesis !!".format(1-0.9993))
